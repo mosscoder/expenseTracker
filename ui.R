@@ -1,5 +1,5 @@
 ui <- fluidPage(
-  fileInput("files", "Choose Expense Reports",
+  fileInput("files", "Select one or more expense reports for account totals by project:",
             accept = c(
               "xlsx"),
             multiple = T
