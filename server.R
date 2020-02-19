@@ -58,7 +58,7 @@ server <- function(input, output) {
     toGG
   })
   
-  output$contents <- renderPlot({
+  output$contents <- renderPlot(height = 800, res = 72,{
     inFile <- input$files
     if (is.null(inFile))
       return(NULL)
