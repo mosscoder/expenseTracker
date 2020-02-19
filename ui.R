@@ -4,6 +4,5 @@ ui <- fluidPage(
               "xlsx"),
             multiple = T
   ),
-  uiOutput("plot.ui")
-  #plotOutput("contents", height = '900px')
+  plotOutput("contents", height = '800px')
 )

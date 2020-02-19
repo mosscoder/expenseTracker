@@ -58,13 +58,15 @@ server <- function(input, output) {
     toGG
   })
   
-  catCount <- reactive({
-    req(input$files)
-    plotLength <-
-      dat() %>% select(Project, Expense.Account) %>% unique() %>% nrow() %>% as.numeric()
-  })
+  ## The following may be used to dynamically adjust plot size, but not in use
   
-  plotHeight <- reactive(40 * catCount())
+  # catCount <- reactive({
+  #   req(input$files)
+  #   plotLength <-
+  #     dat() %>% select(Project, Expense.Account) %>% unique() %>% nrow() %>% as.numeric()
+  # })
+  # 
+  # plotHeight <- reactive(40 * catCount())
   
   output$contents <- renderPlot({
     inFile <- input$files
@@ -140,7 +142,7 @@ server <- function(input, output) {
       fontface = 'bold',
       size = 5) +
       xlab('Account') +
-      ylab('Expenses') +
+      ylab('Amount') +
       facet_grid(. ~ Project , scales = "free", space = 'free') +
       theme_set(theme_gray(base_size = 16)) +
       guides(fill = guide_legend(nrow = 4, title = 'Account')) +
@@ -151,8 +153,5 @@ server <- function(input, output) {
     
   })
   
-  output$plot.ui <- renderUI({
-    #plotOutput("contents", height = plotHeight())
-    plotOutput("contents", height = 800)
-  })
+
 }
