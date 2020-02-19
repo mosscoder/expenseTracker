@@ -47,14 +47,14 @@ server <- function(input, output) {
     projectTotals <- acctSums %>%
       group_by(Project) %>%
       summarize(Totals = sum(Totals)) %>%
-      mutate(Expense.Account = 'Total')
+      mutate(Expense.Account = 'Project Total')
     
     toGG <- rbind(acctSums, projectTotals)
     
     levs <-
-      toGG %>% filter(Expense.Account != 'Total') %>% select(Expense.Account) %>% unique() %>% unlist()
+      toGG %>% filter(Expense.Account != 'Project Total') %>% select(Expense.Account) %>% unique() %>% unlist()
     toGG$Expense.Account <-
-      factor(toGG$Expense.Account , levels = c(levs, 'Total'))
+      factor(toGG$Expense.Account , levels = c(levs, 'Project Total'))
     toGG
   })
   
@@ -139,14 +139,15 @@ server <- function(input, output) {
       fill = 'white',
       fontface = 'bold',
       size = 5) +
-      xlab('Expense Account') +
+      xlab('Account') +
+      ylab('Expenses') +
       facet_grid(. ~ Project , scales = "free", space = 'free') +
       theme_set(theme_gray(base_size = 16)) +
-      guides(fill = guide_legend(nrow = 4, title = 'Expense Account')) +
+      guides(fill = guide_legend(nrow = 4, title = 'Account')) +
       theme(axis.text.x = element_text(angle = 50, hjust = 1),
             legend.position = "top",
             panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-            panel.background = element_rect('grey99'), axis.line = element_line(colour = "black"))
+            panel.background = element_rect('grey97'), axis.line = element_line(colour = "black"))
     
   })
   
