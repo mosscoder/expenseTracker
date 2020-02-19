@@ -58,16 +58,6 @@ server <- function(input, output) {
     toGG
   })
   
-  ## The following may be used to dynamically adjust plot size, but not in use
-  
-  # catCount <- reactive({
-  #   req(input$files)
-  #   plotLength <-
-  #     dat() %>% select(Project, Expense.Account) %>% unique() %>% nrow() %>% as.numeric()
-  # })
-  # 
-  # plotHeight <- reactive(40 * catCount())
-  
   output$contents <- renderPlot({
     inFile <- input$files
     if (is.null(inFile))
