@@ -58,7 +58,15 @@ server <- function(input, output) {
     toGG
   })
   
-  output$contents <- renderPlot(height = 800, res = 72,{
+  catCount <- reactive({
+    req(input$files)
+    plotLength <-
+      dat() %>% select(Project, Expense.Account) %>% unique() %>% nrow() %>% as.numeric()
+  })
+  
+  plotWidth <- reactive(75 * catCount())
+  
+  output$contents <- renderPlot(height = 800, width = plotWidth,{
     inFile <- input$files
     if (is.null(inFile))
       return(NULL)
@@ -130,8 +138,8 @@ server <- function(input, output) {
         y = Totals + (max(Totals) * .05)),
       fill = 'white',
       fontface = 'bold',
-      size = 5) +
-      xlab('Account') +
+      size = 4) +
+      xlab('') +
       ylab('Amount') +
       facet_grid(. ~ Project , scales = "free", space = 'free') +
       theme_set(theme_gray(base_size = 16)) +
