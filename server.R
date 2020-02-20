@@ -66,7 +66,7 @@ server <- function(input, output) {
   
   plotWidth <- reactive(85 * catCount())
   
-  output$contents <- renderPlot(height = 800, width = plotWidth,{
+  output$contents <- renderPlot(height = 800, width = plotWidth, res = 75,{
     inFile <- input$files
     if (is.null(inFile))
       return(NULL)
