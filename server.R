@@ -64,7 +64,7 @@ server <- function(input, output) {
       dat() %>% select(Project, Expense.Account) %>% unique() %>% nrow() %>% as.numeric()
   })
   
-  plotWidth <- reactive(75 * catCount())
+  plotWidth <- reactive(85 * catCount())
   
   output$contents <- renderPlot(height = 800, width = plotWidth,{
     inFile <- input$files
