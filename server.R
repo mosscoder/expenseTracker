@@ -129,7 +129,7 @@ server <- function(input, output) {
     
     pal <- c(palette.full[1:length(unique(dat$Expense.Account)) -1], '#ED4337')
     
-    ggplot(dat,
+    plot <- ggplot(dat,
            aes(x = Expense.Account, y = Totals, fill = Expense.Account)) +
       geom_col(color = 'black') +
       scale_fill_manual(values = pal) +
@@ -148,6 +148,8 @@ server <- function(input, output) {
             legend.position = "top",
             panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
             panel.background = element_rect('grey97'), axis.line = element_line(colour = "black"))
+    
+    plot
     
   })
   
